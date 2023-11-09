@@ -1,0 +1,64 @@
+<html>
+<head>
+<script>
+
+var rates = {
+  "USD": 0.013,
+  "JPY": 1.47,
+  "EUR": 0.011
+};
+
+
+function convert() {
+  
+  var inr = document.getElementById("inr").value;
+  
+  if (isNaN(inr) || inr < 0) {
+    alert("Please enter a valid number");
+    return;
+  }
+ 
+  for (var currency in rates) {
+    
+    var output = document.getElementById(currency);
+    var result = inr * rates[currency];
+    result = result.toFixed(2);
+    output.innerHTML = result;
+  }
+  
+  animate();
+}
+
+
+ function animate() {
+ 
+  var outputs = document.getElementsByClassName("output");
+  
+  for (var i = 0; i < outputs.length; i++) {
+    
+    var output = outputs[i];
+    output.style.fontSize = "20px";
+    output.style.opacity = "0.5";
+    
+    setTimeout(function(output) {
+      return function() {
+        output.style.fontSize = "30px";
+        output.style.opacity = "1";
+      };
+    }(output),1000);
+  }
+}
+</script>
+</head>
+<body>
+  <center>
+<h1>Currency Converter</h1>
+<p><h1>Enter the amount in Indian Rupees (INR)</h1></p>
+<input type="number" id="inr" placeholder="Enter INR">
+<button onclick="convert()">Convert</button>
+<p>USD: <span id="USD" class="output">0.00</span></p>
+<p>JPY: <span id="JPY" class="output">0.00</span></p>
+<p>EUR: <span id="EUR" class="output">0.00</span></p>
+
+</body>
+</html>
